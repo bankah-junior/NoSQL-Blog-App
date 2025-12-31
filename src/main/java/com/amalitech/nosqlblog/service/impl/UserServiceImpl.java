@@ -3,69 +3,113 @@ package com.amalitech.nosqlblog.service.impl;
 import com.amalitech.nosqlblog.cache.Cache;
 import com.amalitech.nosqlblog.cache.LruCache;
 import com.amalitech.nosqlblog.dao.UserDAO;
+import com.amalitech.nosqlblog.dao.impl.PostDAOImpl;
+import com.amalitech.nosqlblog.dao.impl.UserDAOImpl;
+import com.amalitech.nosqlblog.model.Post;
 import com.amalitech.nosqlblog.model.User;
 import com.amalitech.nosqlblog.service.UserService;
+import com.amalitech.nosqlblog.utils.MongoDBConnection;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoDatabase;
 
 import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
-    private final UserDAO userDao;
+    MongoClient client = MongoDBConnection.connect();
     private final Cache<String, User> userCache;
 
-    public UserServiceImpl(UserDAO userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl() {
         this.userCache = new LruCache<>(50);
     }
 
     @Override
     public User create(User user) {
-        User saved = userDao.save(user);
-        userCache.put(saved.getId(), saved);
-        return saved;
+        try{
+            MongoDatabase db = client.getDatabase("java-demo");
+            UserDAOImpl userDAO = new UserDAOImpl(db);
+            User saved = userDAO.save(user);
+            userCache.put(saved.getId(), saved);
+            return saved;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserServiceImpl", e);
+        } finally {
+            client.close(); // close only after all DB work is done
+        }
     }
 
     @Override
     public User update(User user) {
-        Boolean updated = userDao.update(user);
-        if (updated) {
-            userCache.put(user.getId(), user);
+        try{
+            MongoDatabase db = client.getDatabase("java-demo");
+            UserDAOImpl userDAO = new UserDAOImpl(db);
+            if(userDAO.update(user)){
+                userCache.put(user.getId(), user);
+                return user;
+            }
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserServiceImpl", e);
+        } finally {
+            client.close(); // close only after all DB work is done
         }
-        return user;
     }
 
     @Override
     public boolean delete(String userId) {
-        boolean deleted = userDao.deleteById(userId);
-        if (deleted) {
-            userCache.remove(userId);
+        try{
+            MongoDatabase db = client.getDatabase("java-demo");
+            UserDAOImpl userDAO = new UserDAOImpl(db);
+            boolean deleted = userDAO.deleteById(userId);
+            if (deleted) {
+                userCache.remove(userId);
+            }
+            return deleted;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserServiceImpl", e);
+        } finally {
+            client.close(); // close only after all DB work is done
         }
-        return deleted;
     }
 
     @Override
     public User getById(String userId) {
-        if (userCache.containsKey(userId)) {
-            return userCache.get(userId);
+        try{
+            MongoDatabase db = client.getDatabase("java-demo");
+            UserDAOImpl userDAO = new UserDAOImpl(db);
+            return userDAO.findById(userId).orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserServiceImpl", e);
+        } finally {
+            client.close(); // close only after all DB work is done
         }
-
-        Optional<User> user = userDao.findById(userId);
-        if (user.isPresent()) {
-            userCache.put(userId, user.get());
-        }
-        return user.orElse(null);
     }
 
     @Override
     public User getByEmail(String email) {
-        Optional<User> user = userDao.findByEmail(email);
-        return user.orElse(null);
+        try{
+            MongoDatabase db = client.getDatabase("java-demo");
+            UserDAOImpl userDAO = new UserDAOImpl(db);
+            return userDAO.findByEmail(email).orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserServiceImpl", e);
+        } finally {
+            client.close(); // close only after all DB work is done
+        }
     }
 
     @Override
     public List<User> getAll() {
-        return userDao.findAll();
+        try{
+            MongoDatabase db = client.getDatabase("java-demo");
+            UserDAOImpl userDAO = new UserDAOImpl(db);
+            return userDAO.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserServiceImpl", e);
+        } finally {
+            client.close(); // close only after all DB work is done
+        }
     }
 }
 

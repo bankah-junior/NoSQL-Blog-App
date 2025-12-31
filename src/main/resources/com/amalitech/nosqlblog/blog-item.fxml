@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="10"
+      style="-fx-padding: 16;
+             -fx-background-color: #ffffff;
+             -fx-background-radius: 10;
+             -fx-border-color: #e5e7eb;
+             -fx-border-radius: 10;"
+      xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      fx:controller="com.amalitech.nosqlblog.BlogItemController">
+
+    <!-- ================= TITLE ================= -->
+    <Label fx:id="titleLabel"
+           wrapText="true"
+           style="-fx-font-size: 18px;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #111827;" />
+
+    <!-- ================= META ================= -->
+    <HBox spacing="6">
+        <Label fx:id="authorLabel"
+               style="-fx-text-fill: #4b5563;" />
+        <Label text="•" style="-fx-text-fill: #9ca3af;" />
+        <Label fx:id="timeLabel"
+               text="2 hours ago"
+               style="-fx-text-fill: #9ca3af;" />
+    </HBox>
+
+    <!-- ================= CONTENT ================= -->
+    <Label fx:id="contentLabel"
+           wrapText="true"
+           style="-fx-text-fill: #374151;
+                  -fx-font-size: 14px;" />
+
+    <!-- ================= STATS & ACTIONS ================= -->
+    <HBox spacing="20" alignment="CENTER_LEFT">
+
+        <!-- Likes -->
+        <HBox spacing="4" alignment="CENTER_LEFT">
+            <Label text="♥" style="-fx-text-fill: #6366f1;" />
+            <Label fx:id="likesLabel" text="128" />
+        </HBox>
+
+        <!-- Comments -->
+        <HBox spacing="4" alignment="CENTER_LEFT">
+            <Label text="💬" />
+            <Label fx:id="commentsLabel" text="34" />
+        </HBox>
+
+        <!-- Views -->
+        <HBox spacing="4" alignment="CENTER_LEFT">
+            <Label text="👁" />
+            <Label fx:id="viewsLabel" text="2,450 views" />
+        </HBox>
+
+        <Region HBox.hgrow="ALWAYS" />
+
+        <!-- Share -->
+        <Button text="↗ Share"
+                mnemonicParsing="false"
+                fx:id="sharePostButton"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #4f46e5;" />
+
+        <!-- Edit -->
+        <Button text="✎ Edit"
+                mnemonicParsing="false"
+                fx:id="editPostButton"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #4f46e5;" />
+
+        <!-- Delete -->
+        <Button text="🗑 Delete"
+                mnemonicParsing="false"
+                fx:id="deletePostButton"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #ef4444;" />
+    </HBox>
+
+    <!-- ================= COMMENT INPUT ================= -->
+    <HBox spacing="8"
+          style="-fx-background-color: #f9fafb;
+                 -fx-padding: 10;
+                 -fx-background-radius: 8;">
+
+        <TextField promptText="Write a comment..."
+                   HBox.hgrow="ALWAYS"
+                   style="-fx-background-radius: 6;
+                          -fx-border-radius: 6;" />
+
+        <Button text="Post"
+                mnemonicParsing="false"
+                fx:id="postCommentButton"
+                style="-fx-background-color: #6366f1;
+                       -fx-text-fill: white;
+                       -fx-background-radius: 6;" />
+    </HBox>
+
+</VBox>

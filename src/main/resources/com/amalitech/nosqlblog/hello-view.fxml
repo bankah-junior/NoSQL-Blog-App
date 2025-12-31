@@ -1,16 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.amalitech.nosqlblog.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="780.0" style="-fx-background-color: #ffffff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.amalitech.nosqlblog.HelloController">
+   <Pane prefHeight="78.0" prefWidth="780.0" style="-fx-background-color: #ffffff;">
+      <children>
+         <HBox alignment="CENTER_LEFT" layoutX="63.0" prefHeight="74.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+            <children>
+               <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@logo.jpg" />
+                  </image>
+               </ImageView>
+               <Label prefHeight="35.0" prefWidth="144.0" text="Bankah Blog">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+                  <opaqueInsets>
+                     <Insets bottom="5.0" />
+                  </opaqueInsets>
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+            </children>
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" layoutX="473.0" prefHeight="74.0" prefWidth="241.0">
+            <children>
+               <Pane prefHeight="74.0" prefWidth="38.0">
+                  <children>
+                     <Label prefHeight="74.0" prefWidth="35.0" text="User:">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </Pane>
+               <Pane prefHeight="74.0" prefWidth="103.0">
+                  <children>
+                     <Label fx:id="username" prefHeight="74.0" prefWidth="103.0" text="Anthony">
+                        <font>
+                           <Font name="System Bold" size="16.0" />
+                        </font>
+                        <padding>
+                           <Insets left="7.0" />
+                        </padding>
+                     </Label>
+                  </children>
+               </Pane>
+               <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: indigo;" text="New Post" textFill="WHITE">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Button>
+            </children>
+         </HBox>
+      </children>
+   </Pane>
+   <Pane prefHeight="491.0" prefWidth="780.0" style="-fx-background-color: #f3f3f8;">
+      <children>
+         <HBox alignment="CENTER_LEFT" layoutX="56.0" layoutY="9.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: white; -fx-border-radius: 1000;">
+            <children>
+               <Label prefHeight="26.0" prefWidth="55.0" text="Blog">
+                  <font>
+                     <Font name="System Bold" size="17.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+               <Label prefHeight="26.0" prefWidth="46.0" text="feed">
+                  <font>
+                     <Font size="17.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+            </children>
+         </HBox>
+          <ScrollPane layoutX="56.0" layoutY="70.0"
+                      prefHeight="410.0" prefWidth="650.0"
+                      fitToWidth="true"
+                      style="-fx-background-color: white;">
+
+              <content>
+                  <ListView fx:id="blogListView"
+                            prefHeight="526.0"
+                            prefWidth="634.0"
+                            style="-fx-background-color: white;" />
+
+              </content>
+          </ScrollPane>
+      </children>
+   </Pane>
 </VBox>
