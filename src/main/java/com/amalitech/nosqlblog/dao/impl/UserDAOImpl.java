@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.amalitech.nosqlblog.utils.PasswordUtils.verifyPassword;
 import static com.mongodb.client.model.Filters.eq;
 import static com.amalitech.nosqlblog.utils.PasswordUtils.hashPassword;
 
@@ -65,6 +66,18 @@ public class UserDAOImpl implements UserDAO {
             return entity;
         }
         return null;
+    }
+
+    @Override
+    public Optional<User> login(String email, String password) {
+        Document doc = usersCollection.find(eq("email", email)).first();
+        if(doc != null){
+            String hashedPassword = doc.getString("passwordHash");
+            if(verifyPassword(password, hashedPassword)){
+                return Optional.of(mapToUser(doc));
+            }
+        }
+        return Optional.empty();
     }
 
     @Override

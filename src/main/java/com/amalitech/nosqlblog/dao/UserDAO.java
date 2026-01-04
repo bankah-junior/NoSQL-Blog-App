@@ -10,5 +10,7 @@ public interface UserDAO extends BaseDAO<User> {
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> login(String email, String password);
+
 }
 

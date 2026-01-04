@@ -40,6 +40,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User login(String email, String password) {
+        try{
+            MongoDatabase db = client.getDatabase("java-demo");
+            UserDAOImpl userDAO = new UserDAOImpl(db);
+            Optional<User> userOpt = userDAO.login(email, password);
+            return userOpt.orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize UserServiceImpl", e);
+        } finally {
+            client.close(); // close only after all DB work is done
+        }
+    }
+
+    @Override
     public User update(User user) {
         try{
             MongoDatabase db = client.getDatabase("java-demo");

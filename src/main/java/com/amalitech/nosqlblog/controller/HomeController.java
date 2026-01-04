@@ -1,4 +1,4 @@
-package com.amalitech.nosqlblog;
+package com.amalitech.nosqlblog.controller;
 
 import com.amalitech.nosqlblog.model.Post;
 import com.amalitech.nosqlblog.service.impl.PostServiceImpl;
@@ -12,10 +12,13 @@ import javafx.scene.control.ListView;
 import java.io.IOException;
 import java.util.List;
 
-public class HelloController {
+public class HomeController {
 
     @FXML
     private ListView<Post> blogListView;
+
+    @FXML
+    private Label username;
 
     @FXML
     public void initialize() {
@@ -48,6 +51,11 @@ public class HelloController {
                 }
             }
         });
+    }
+
+     @FXML
+    public void setUsername(String username) {
+        this.username.setText(username);
     }
 }
 

@@ -8,6 +8,8 @@ public interface UserService {
 
     User create(User user);
 
+    User login(String email, String password);
+
     User update(User user);
 
     boolean delete(String userId);

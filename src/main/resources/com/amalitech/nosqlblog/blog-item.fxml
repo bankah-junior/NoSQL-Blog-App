@@ -13,7 +13,7 @@
              -fx-border-radius: 10;"
       xmlns:fx="http://javafx.com/fxml/1"
       xmlns="http://javafx.com/javafx/17.0.12"
-      fx:controller="com.amalitech.nosqlblog.BlogItemController">
+      fx:controller="com.amalitech.nosqlblog.controller.BlogItemController">
 
     <!-- ================= TITLE ================= -->
     <Label fx:id="titleLabel"

@@ -32,6 +32,7 @@ public final class RegexValidatorUtils {
      * Validates email format.
      */
     public static boolean isValidEmail(String email) {
+
         return isNotBlank(email) && email.matches(EMAIL_REGEX);
     }
 

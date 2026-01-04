@@ -10,4 +10,6 @@ module com.amalitech.nosqlblog {
 
     opens com.amalitech.nosqlblog to javafx.fxml;
     exports com.amalitech.nosqlblog;
+    exports com.amalitech.nosqlblog.controller;
+    opens com.amalitech.nosqlblog.controller to javafx.fxml;
 }
