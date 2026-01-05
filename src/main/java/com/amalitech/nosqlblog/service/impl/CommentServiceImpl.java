@@ -1,7 +1,11 @@
 package com.amalitech.nosqlblog.service.impl;
 
+import com.amalitech.nosqlblog.dao.impl.CommentDAOImpl;
 import com.amalitech.nosqlblog.model.Comment;
 import com.amalitech.nosqlblog.service.CommentService;
+import com.amalitech.nosqlblog.utils.MongoDBConnection;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoDatabase;
 
 import java.util.List;
 
@@ -9,21 +13,58 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment create(Comment comment) {
-        return null;
+        MongoClient client = MongoDBConnection.connect();
+        try {
+            MongoDatabase db = client.getDatabase("java-demo");
+            CommentDAOImpl commentDAO = new CommentDAOImpl(db);
+            return commentDAO.save(comment);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create comment", e);
+        } finally {
+            client.close();
+        }
     }
 
     @Override
     public boolean delete(String commentId) {
-        return false;
+        MongoClient client = MongoDBConnection.connect();
+        try {
+            MongoDatabase db = client.getDatabase("java-demo");
+            CommentDAOImpl commentDAO = new CommentDAOImpl(db);
+            return commentDAO.deleteById(commentId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete comment", e);
+        } finally {
+            client.close();
+        }
     }
 
     @Override
     public List<Comment> getByPost(String postId) {
-        return List.of();
+        MongoClient client = MongoDBConnection.connect();
+        try {
+            MongoDatabase db = client.getDatabase("java-demo");
+            CommentDAOImpl commentDAO = new CommentDAOImpl(db);
+            return commentDAO.findByPostId(postId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get comments by post", e);
+        } finally {
+            client.close();
+        }
     }
 
     @Override
     public List<Comment> getByUser(String userId) {
-        return List.of();
+        MongoClient client = MongoDBConnection.connect();
+        try {
+            MongoDatabase db = client.getDatabase("java-demo");
+            CommentDAOImpl commentDAO = new CommentDAOImpl(db);
+            // Note: This would need a findByUserId method in DAO
+            return List.of();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get comments by user", e);
+        } finally {
+            client.close();
+        }
     }
 }

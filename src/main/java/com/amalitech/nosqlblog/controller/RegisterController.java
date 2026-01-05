@@ -44,7 +44,7 @@ public class RegisterController {
                     homeController.setUsername(user.getUsername());
                     stage.setTitle("Home Screen");
                     stage.setScene(scene);
-                    stage.setResizable(false);
+                    //stage.setResizable(false);
                     stage.show();
                 } catch (IOException e) {
                     messageLabel.setText("OPPS!!! Navigation broken. Try again.");

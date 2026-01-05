@@ -19,5 +19,13 @@ public interface PostService {
     List<Post> searchByTitle(String keyword);
 
     List<Post> getByAuthor(String authorId);
+    
+    List<Post> searchByTag(String tagName);
+    
+    List<Post> sortByDate(List<Post> posts, boolean ascending);
+    
+    List<Post> sortByTitle(List<Post> posts, boolean ascending);
+    
+    List<Post> getAllSorted(String sortBy, boolean ascending);
 }
 

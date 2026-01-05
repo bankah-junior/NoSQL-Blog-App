@@ -1,110 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="569.0" prefWidth="780.0" style="-fx-background-color: #ffffff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.amalitech.nosqlblog.controller.HomeController">
-   <Pane prefHeight="78.0" prefWidth="780.0" style="-fx-background-color: #ffffff;">
-      <children>
-         <HBox alignment="CENTER_LEFT" layoutX="63.0" prefHeight="74.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-            <children>
-               <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@logo.jpg" />
-                  </image>
-               </ImageView>
-               <Label prefHeight="35.0" prefWidth="144.0" text="Bankah Blog">
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-                  <opaqueInsets>
-                     <Insets bottom="5.0" />
-                  </opaqueInsets>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-               </Label>
-            </children>
-            <opaqueInsets>
-               <Insets />
-            </opaqueInsets>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="473.0" prefHeight="74.0" prefWidth="241.0">
-            <children>
-               <Pane prefHeight="74.0" prefWidth="38.0">
-                  <children>
-                     <Label prefHeight="74.0" prefWidth="35.0" text="User:">
-                        <font>
-                           <Font size="16.0" />
-                        </font>
-                     </Label>
-                  </children>
-               </Pane>
-               <Pane prefHeight="74.0" prefWidth="103.0">
-                  <children>
-                     <Label fx:id="username" prefHeight="74.0" prefWidth="103.0" text="Anthony">
-                        <font>
-                           <Font name="System Bold" size="16.0" />
-                        </font>
-                        <padding>
-                           <Insets left="7.0" />
-                        </padding>
-                     </Label>
-                  </children>
-               </Pane>
-               <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: indigo;" text="New Post" textFill="WHITE">
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Button>
-            </children>
-         </HBox>
-      </children>
-   </Pane>
-   <Pane prefHeight="491.0" prefWidth="780.0" style="-fx-background-color: #f3f3f8;">
-      <children>
-         <HBox alignment="CENTER_LEFT" layoutX="56.0" layoutY="9.0" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: white; -fx-border-radius: 1000;">
-            <children>
-               <Label prefHeight="26.0" prefWidth="55.0" text="Blog">
-                  <font>
-                     <Font name="System Bold" size="17.0" />
-                  </font>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-               </Label>
-               <Label prefHeight="26.0" prefWidth="46.0" text="feed">
-                  <font>
-                     <Font size="17.0" />
-                  </font>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-               </Label>
-            </children>
-         </HBox>
-          <ScrollPane layoutX="56.0" layoutY="70.0"
-                      prefHeight="410.0" prefWidth="650.0"
-                      fitToWidth="true"
-                      style="-fx-background-color: white;">
+<VBox spacing="0" style="-fx-background-color: #f8fafc;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.amalitech.nosqlblog.controller.HomeController">
+   <children>
+      <!-- Modern Header -->
+      <HBox alignment="CENTER_LEFT" style="-fx-background-color: #ffffff; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" VBox.vgrow="NEVER">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="12">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label text="Bankah Blog" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e293b;">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER" spacing="15">
+               <children>
+                  <Label text="Welcome," style="-fx-text-fill: #64748b; -fx-font-size: 14px;" />
+                  <Label fx:id="username" text="User" style="-fx-text-fill: #1e293b; -fx-font-size: 16px; -fx-font-weight: bold;">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" />
+                  <Button fx:id="newPostButton" onAction="#onNewPostClick" mnemonicParsing="false" 
+                          style="-fx-background-color: #6366f1; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.3), 5, 0, 0, 2);" 
+                          text="+ New Post">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="analyticsButton" onAction="#onAnalyticsClick" mnemonicParsing="false" 
+                          style="-fx-background-color: #8b5cf6; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(139,92,246,0.3), 5, 0, 0, 2);" 
+                          text="📊 Analytics">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="40.0" right="40.0" />
+         </padding>
+      </HBox>
 
-              <content>
-                  <ListView fx:id="blogListView"
-                            prefHeight="526.0"
-                            prefWidth="634.0"
-                            style="-fx-background-color: white;" />
+      <!-- Main Content Area -->
+      <VBox spacing="20" style="-fx-padding: 30;" VBox.vgrow="ALWAYS">
+         <children>
+            <!-- Search and Filter Section -->
+            <VBox spacing="15" style="-fx-background-color: #ffffff; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+               <children>
+                  <Label text="Discover Posts" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1e293b;">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  
+                  <!-- Search Bar -->
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <children>
+                        <TextField fx:id="searchField" promptText="🔍 Search posts by title, tag, or author..." 
+                                   HBox.hgrow="ALWAYS" 
+                                   style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0; -fx-padding: 12; -fx-font-size: 14px;" />
+                        <Button fx:id="searchButton" onAction="#onSearchClick" mnemonicParsing="false" 
+                                text="Search" 
+                                style="-fx-background-color: #6366f1; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 12 24; -fx-cursor: hand; -fx-font-size: 14px; -fx-font-weight: bold;" />
+                     </children>
+                  </HBox>
+                  
+                  <!-- Sort Controls -->
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Sort:" style="-fx-text-fill: #64748b; -fx-font-size: 14px; -fx-font-weight: bold;" />
+                        <ComboBox fx:id="sortComboBox" prefWidth="150.0" 
+                                  style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+                        <ComboBox fx:id="sortOrderComboBox" prefWidth="130.0" 
+                                  style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="clearFiltersButton" onAction="#onClearFiltersClick" mnemonicParsing="false" 
+                                text="Clear Filters" 
+                                style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
 
-              </content>
-          </ScrollPane>
-      </children>
-   </Pane>
+            <!-- Posts List -->
+            <VBox spacing="15" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Recent Posts" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1e293b;">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  
+                  <ScrollPane fitToWidth="true" 
+                              style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0;" 
+                              VBox.vgrow="ALWAYS">
+                     <content>
+                        <ListView fx:id="blogListView" 
+                                  style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
 </VBox>

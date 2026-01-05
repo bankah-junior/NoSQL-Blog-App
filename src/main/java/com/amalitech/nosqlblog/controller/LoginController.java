@@ -35,10 +35,10 @@ public class LoginController {
                     FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("home.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     HomeController homeController = fxmlLoader.getController();
-                    homeController.setUsername(user.getUsername());
+                    homeController.setCurrentUser(user);
                     stage.setTitle("Home Screen");
                     stage.setScene(scene);
-                    stage.setResizable(false);
+                    //stage.setResizable(false);
                     stage.show();
                 } catch (IOException e) {
                     messageLabel.setText("OPPS!!! Navigation broken. Try again.");
