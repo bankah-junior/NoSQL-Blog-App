@@ -1,6 +1,7 @@
 package com.amalitech.nosqlblog.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Post {
 
@@ -11,6 +12,7 @@ public class Post {
     private boolean published;
     private Long createdAt;
     private Long updatedAt;
+    private List<Review> reviews;
 
     public Post() {}
 
@@ -46,6 +48,9 @@ public class Post {
 
     public Long getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Long updatedAt) { this.updatedAt = updatedAt; }
+
+    public List<Review> getReviews() { return reviews; }
+    public void setReviews(List<Review> reviews) { this.reviews = reviews; }
 
     public String getPostId() { return id; }
      public void setPostId(String postId) {

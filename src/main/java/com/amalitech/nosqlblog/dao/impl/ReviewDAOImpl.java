@@ -2,7 +2,7 @@ package com.amalitech.nosqlblog.dao.impl;
 
 import com.amalitech.nosqlblog.dao.ReviewDAO;
 import com.amalitech.nosqlblog.model.Review;
-import com.mongodb.client.ClientSession;
+import com.amalitech.nosqlblog.utils.MongoDBConnection;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
@@ -21,7 +21,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
     public ReviewDAOImpl(MongoDatabase database) {
         if (database == null) {
-            throw new IllegalArgumentException("database must not be null");
+            database = MongoDBConnection.connect().getDatabase("java-demo");
         }
         this.reviewsCollection = database.getCollection("reviews", Document.class);
 

@@ -2,8 +2,11 @@ package com.amalitech.nosqlblog.service.impl;
 
 import com.amalitech.nosqlblog.cache.Cache;
 import com.amalitech.nosqlblog.cache.LruCache;
+import com.amalitech.nosqlblog.dao.ReviewDAO;
 import com.amalitech.nosqlblog.dao.impl.PostDAOImpl;
+import com.amalitech.nosqlblog.dao.impl.ReviewDAOImpl;
 import com.amalitech.nosqlblog.model.Post;
+import com.amalitech.nosqlblog.model.Review;
 import com.amalitech.nosqlblog.service.PostService;
 import com.amalitech.nosqlblog.utils.MongoDBConnection;
 import com.mongodb.client.MongoClient;
@@ -13,9 +16,11 @@ import java.util.*;
 
 public class PostServiceImpl implements PostService {
     private final Cache<String, Post> postCache;
+    private final ReviewDAO reviewDAO;
 
     public PostServiceImpl() {
         this.postCache = new LruCache<>(50);
+        this.reviewDAO = new ReviewDAOImpl(MongoDBConnection.connect().getDatabase("java-demo"));
     }
 
     @Override
@@ -76,10 +81,13 @@ public class PostServiceImpl implements PostService {
         try{
             MongoDatabase db = client.getDatabase("java-demo");
             PostDAOImpl postDAO = new PostDAOImpl(db);
-            Optional<Post> posts = postDAO.findById(postId);
-            if(posts.isPresent()){
-                postCache.put(postId, posts.get());
-                return posts.get();
+            Optional<Post> postOptional = postDAO.findById(postId);
+            if(postOptional.isPresent()){
+                Post post = postOptional.get();
+                List<Review> reviews = reviewDAO.findByPostId(postId);
+                post.setReviews(reviews);
+                postCache.put(postId, post);
+                return post;
             }
             return postCache.get(postId);
         } catch (Exception e) {
@@ -95,7 +103,13 @@ public class PostServiceImpl implements PostService {
         try{
             MongoDatabase db = client.getDatabase("java-demo");
             PostDAOImpl postDAO = new PostDAOImpl(db);
-            return postDAO.findAll();
+            List<Post> posts = postDAO.findAll();
+            for (Post post : posts) {
+                List<Review> reviews = reviewDAO.findByPostId(post.getId());
+                post.setReviews(reviews);
+                postCache.put(post.getId(), post);
+            }
+            return posts;
         } catch (Exception e) {
             throw new RuntimeException("Failed to get all posts", e);
         } finally {
