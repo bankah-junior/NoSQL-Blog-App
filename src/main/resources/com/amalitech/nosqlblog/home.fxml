@@ -16,10 +16,10 @@
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@logo.jpg" />
+                        <Image url="@logo.png" />
                      </image>
                   </ImageView>
-                  <Label text="Bankah Blog" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e293b;">
+                  <Label text="FX Blog" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e293b;">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
