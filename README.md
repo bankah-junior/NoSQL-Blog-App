@@ -348,7 +348,7 @@ This project is part of an educational assignment.
 
 ---
 
-## Acknowledgments
+## Acknowledgments.
 
 - MongoDB for the excellent NoSQL database
 - JavaFX team for the UI framework
